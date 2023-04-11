@@ -23,7 +23,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView productText = findViewById(R.id.product_title);
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.host_fragment_main_activity, HomeFragment.class, null)
+                    .commit();
+        }
+
+      /*  TextView productText = findViewById(R.id.product_title);
 
         productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
 
@@ -35,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        productViewModel.getProductResponseLiveData(1).observe(this, nameObserver);
+        productViewModel.getProductResponseLiveData(1).observe(this, nameObserver);*/
 
     }
 }
