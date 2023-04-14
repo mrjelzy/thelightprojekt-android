@@ -57,10 +57,12 @@
         app:boxCornerRadiusBottomStart="15dp"
         app:boxCornerRadiusTopStart="15dp"
         android:layout_marginBottom="14dp"
+        app:endIconMode="clear_text"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -83,24 +85,29 @@
         app:boxCornerRadiusBottomEnd="15dp"
         app:boxCornerRadiusBottomStart="15dp"
         app:boxCornerRadiusTopStart="15dp"
+        app:endIconMode="password_toggle"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login"
-        android:layout_width="346dp"
+        android:layout_width ="346dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"
         app:cornerRadius="20dp"
         android:textFontWeight="700"
         android:textSize="20dp"
-        android:text="SIGN IN"/>
+        android:paddingVertical="10dp"
+        android:text="SIGN IN"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/register"
@@ -110,7 +117,12 @@
         app:cornerRadius="20dp"
         android:text="REGISTER"
         android:textSize="20dp"
-        android:textFontWeight="700"/>
+        android:textFontWeight="700"
+        android:backgroundTint="@color/white"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/black"/>
 
     <ProgressBar
         android:id="@+id/loading"

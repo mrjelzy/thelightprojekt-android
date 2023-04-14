@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/item_1"
+        android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/home_48px"
         android:title="@string/text_label_home"/>
     <item
-        android:id="@+id/item_2"
+        android:id="@+id/chat"
         android:enabled="true"
         android:icon="@drawable/chat_bubble_48px"
         android:title="@string/text_label_chat"/>
     <item
-        android:id="@+id/item_3"
+        android:id="@+id/cart"
         android:enabled="true"
         android:icon="@drawable/shopping_bag_48px"
         android:title="@string/text_label_shoppingBag"/>
     <item
-        android:id="@+id/item_2"
+        android:id="@+id/account"
         android:enabled="true"
         android:icon="@drawable/person_48px"
         android:title="@string/text_label_account"/>

@@ -1,16 +1,20 @@
 package com.thelightprojekt.view;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.material.navigation.NavigationBarView;
 import com.thelightprojekt.R;
 import com.thelightprojekt.model.data.ProductInfo;
 import com.thelightprojekt.model.data.ProductResponse;
+import com.thelightprojekt.view.ui.login.LoginFragment;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +33,34 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.host_fragment_main_activity, HomeFragment.class, null)
                     .commit();
         }
+
+        NavigationBarView navBarr=findViewById(R.id.bottomNavBar);
+        LoginFragment loginFragment=new LoginFragment();
+        HomeFragment homeFragment=new HomeFragment();
+        navBarr.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+
+                    case R.id.account:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.host_fragment_main_activity,loginFragment)
+                                .setReorderingAllowed(true)
+                                .addToBackStack("LoginFragment")
+                                .commit();
+                        return true;
+
+                    case R.id.home:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.host_fragment_main_activity,homeFragment)
+                                .setReorderingAllowed(true)
+                                .addToBackStack("HomeFragment")
+                                .commit();
+                        return true;
+                }
+                return false;
+            }
+        });
 
       /*  TextView productText = findViewById(R.id.product_title);
 

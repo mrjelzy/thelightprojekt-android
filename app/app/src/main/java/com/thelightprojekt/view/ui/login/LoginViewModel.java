@@ -9,7 +9,7 @@ import android.util.Patterns;
 import com.thelightprojekt.view.data.LoginRepository;
 import com.thelightprojekt.view.data.Result;
 import com.thelightprojekt.view.data.model.LoggedInUser;
-import com.thelightprojekt.view.R;
+import com.thelightprojekt.R;
 
 public class LoginViewModel extends ViewModel {
 
