@@ -1,20 +1,13 @@
 package com.thelightprojekt.view;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.thelightprojekt.R;
-import com.thelightprojekt.model.data.ProductInfo;
-import com.thelightprojekt.model.data.ProductResponse;
-import com.thelightprojekt.view.ui.login.LoginFragment;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
