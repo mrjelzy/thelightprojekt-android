@@ -44,4 +44,10 @@
         android:layout_marginTop="15dp"
         android:paddingHorizontal="30dp"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/product_recycler_view"/>
+
 </LinearLayout>

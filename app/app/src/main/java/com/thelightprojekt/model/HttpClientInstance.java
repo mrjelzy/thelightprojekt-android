@@ -1,6 +1,8 @@
 package com.thelightprojekt.model;
 
-import com.thelightprojekt.BuildConfig;
+import android.util.Log;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -12,23 +14,23 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClientInstance {
+public class HttpClientInstance {
+    private static OkHttpClient client = null;
+
+    private static Retrofit retrofit;
 
     static {
         System.loadLibrary("native-lib");
     }
 
     public static native String getEncryptedKey();
-    private static Retrofit retrofit;
 
-    public static Retrofit getRetrofit(){
-
-        if(retrofit == null){
-
+    public static OkHttpClient getClient() {
+        if (client == null) {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-            OkHttpClient httpClient = new OkHttpClient.Builder()
+            client = new OkHttpClient.Builder()
                     .addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
@@ -37,17 +39,30 @@ public class RetrofitClientInstance {
                                     .addHeader("Io-Format","JSON")
                                     .build();
                             return chain.proceed(request);
-                            }
-                        })
+                        }
+                    })
                     .addInterceptor(logging)
                     .build();
+        }
 
-            retrofit = new Retrofit.Builder()
-                    .baseUrl("https://www.thelightprojekt.com/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .client(httpClient)
-                    .build();
+        return client;
+    }
+
+
+    public static Retrofit getRetrofit(){
+
+        if(retrofit == null){
+            OkHttpClient httpClient = HttpClientInstance.getClient();
+
+            if(httpClient != null){
+                retrofit = new Retrofit.Builder()
+                        .baseUrl("https://www.thelightprojekt.com/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .client(httpClient)
+                        .build();
+            }
         }
         return retrofit;
     }
+
 }

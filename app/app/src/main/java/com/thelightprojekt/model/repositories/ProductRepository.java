@@ -3,8 +3,8 @@ package com.thelightprojekt.model.repositories;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.thelightprojekt.model.RetrofitClientInstance;
-import com.thelightprojekt.model.data.ProductInfo;
+import com.thelightprojekt.model.HttpClientInstance;
+import com.thelightprojekt.model.data.ProductList;
 import com.thelightprojekt.model.data.ProductResponse;
 import com.thelightprojekt.model.interfaces.IProductService;
 
@@ -17,7 +17,7 @@ public class ProductRepository {
     private IProductService productService;
 
     public ProductRepository() {
-        productService = RetrofitClientInstance.getRetrofit().create(IProductService.class);
+        productService = HttpClientInstance.getRetrofit().create(IProductService.class);
     }
 
     public LiveData<ProductResponse> searchProduct(int id){
@@ -38,5 +38,24 @@ public class ProductRepository {
                });
        return data;
     }
+
+
+    public LiveData<ProductList> getProductList(){
+        final MutableLiveData<ProductList> data = new MutableLiveData<ProductList>();
+        productService.getAllProductsIds().enqueue(new Callback<ProductList>() {
+            @Override
+            public void onResponse(Call<ProductList> call, Response<ProductList> response) {
+                if (response.body() != null) {
+                    data.setValue(response.body());
+                }
+            }
+            @Override
+            public void onFailure(Call<ProductList> call, Throwable t) {
+                System.out.println("request failed: " + t.getMessage());
+            }
+        });
+        return data;
+    }
+
 
 }
