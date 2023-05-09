@@ -31,12 +31,11 @@ public class ProductViewModel extends AndroidViewModel {
 
 
     public LiveData<ProductResponse> getProductResponseLiveData(int id) {
-         LiveData<ProductResponse> data = productRepository.searchProduct(id);
-         return data;
+        return productRepository.searchProduct(id);
     }
 
     public LiveData<ProductList> getProductList(){
         return productRepository.getProductList();
     }
-
+    
 }

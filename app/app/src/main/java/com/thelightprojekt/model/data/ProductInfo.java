@@ -12,6 +12,12 @@ public class ProductInfo {
     @SerializedName("description")
     private String description;
 
+    @SerializedName("price")
+    private String price;
+
+    @SerializedName("id_default_image")
+    private String defaultImage;
+
     @SerializedName("associations")
     private Association associations;
 
@@ -45,5 +51,21 @@ public class ProductInfo {
 
     public void setAssociations(Association associations) {
         this.associations = associations;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getDefaultImage() {
+        return defaultImage;
+    }
+
+    public void setDefaultImage(String defaultImage) {
+        this.defaultImage = defaultImage;
     }
 }

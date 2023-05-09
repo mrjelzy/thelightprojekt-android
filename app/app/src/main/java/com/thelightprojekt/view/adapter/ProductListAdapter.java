@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import com.thelightprojekt.R;
 import com.thelightprojekt.model.HttpClientInstance;
 import com.thelightprojekt.model.data.ProductResponse;
+import com.thelightprojekt.view.ShopFragment;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     // FOR DATA
     private ArrayList<ProductResponse> products;
+    private OnItemClickListener listener;
     Context context;
 
     // CONSTRUCTOR
@@ -49,23 +51,26 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
         holder.productTitle.setText(product.getProductInfo().getName());
 
-
-        OkHttpClient httpClient = HttpClientInstance.getClient();
-
-        Picasso picasso = new Picasso.Builder(context)
-                .downloader(new OkHttp3Downloader(httpClient))
-                .build();
-
         String id_product = product.getProductInfo().getId();
-        String id_img = product.getProductInfo().getAssociations().getImages().get(0).getId();
+        String id_img = product.getProductInfo().getDefaultImage();
 
         String urlImg = "https://www.thelightprojekt.com/api/images/products/"+id_product+"/"+id_img+"/";
+
+        Picasso picasso = HttpClientInstance.getPicasso(context);
 
         picasso.load(urlImg)
                 .fit()
                 .centerCrop()
                 .into(holder.productImage);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onItemClick(product);
+                }
+            }
+        });
 
     }
 
@@ -89,5 +94,13 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             productImage = itemView.findViewById(R.id.image_product);
         }
 
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(ProductResponse product);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

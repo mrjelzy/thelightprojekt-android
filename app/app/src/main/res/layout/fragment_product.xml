@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".view.ProductFragment"
+            android:orientation="vertical"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            tools:ignore="MissingClass">
+
+            <TextView
+                android:id="@+id/product_title_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textFontWeight="700"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="true"/>
+
+            <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+                android:id="@+id/carousel"
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:layout_marginTop="50dp"
+                app:showBottomShadow="false"
+                app:showIndicator="true"
+                app:showNavigationButtons="false"
+                app:showTopShadow="false" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textFontWeight="700"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:gravity="start"
+                    android:text="@string/product_about"
+                    android:layout_marginStart="30dp"
+                    android:textAllCaps="true"/>
+
+                <TextView
+                    android:id="@+id/product_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black"
+                    android:textFontWeight="500"
+                    android:gravity="end"
+                    android:layout_marginEnd="30dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/product_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textFontWeight="400"
+                android:layout_marginHorizontal="30dp"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"
+                android:justificationMode="inter_word"
+                />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_try_online"
+                android:layout_marginTop="10dp"
+                android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cornerRadius="20dp"
+                android:text="@string/product_button_try_online"
+                android:textSize="20dp"
+                android:textFontWeight="700"
+                android:backgroundTint="@color/white"
+                app:strokeColor="@color/black"
+                app:strokeWidth="2dp"
+                android:paddingVertical="10dp"
+                android:textColor="@color/black"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_add_to_cart"
+                android:layout_width ="346dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cornerRadius="20dp"
+                android:textFontWeight="700"
+                android:textSize="20dp"
+                android:paddingVertical="10dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/product_button_add_to_cart"
+                />
+
+        </LinearLayout>
+</ScrollView>

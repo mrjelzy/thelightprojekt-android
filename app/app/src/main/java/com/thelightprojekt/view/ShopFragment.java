@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,12 +19,13 @@ import android.view.ViewGroup;
 import com.thelightprojekt.R;
 import com.thelightprojekt.model.data.ProductList;
 import com.thelightprojekt.model.data.ProductResponse;
+import com.thelightprojekt.model.data.SubSimpleAssociation;
 import com.thelightprojekt.view.adapter.ProductListAdapter;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;
 
-public class ShopFragment extends Fragment {
+public class ShopFragment extends Fragment implements ProductListAdapter.OnItemClickListener {
 
     private ProductViewModel viewModel;
     private ArrayList<ProductResponse> products;
@@ -53,6 +55,7 @@ public class ShopFragment extends Fragment {
         productsRecyclerView.setLayoutManager(linearLayoutManager);
 
         ProductListAdapter adapter = new ProductListAdapter(requireContext(), products);
+        adapter.setOnItemClickListener(this);
         productsRecyclerView.setAdapter(adapter);
         productsRecyclerView.setHasFixedSize(true);
 
@@ -60,10 +63,12 @@ public class ShopFragment extends Fragment {
             @Override
             public void onChanged(ProductList productList) {
                 if(productList != null){
+                    products.clear();
                     int nbProducts = productList.getProducts().size();
-                    for(int i=1; i<nbProducts; i++){
-                        int finalI = i;
-                        viewModel.getProductResponseLiveData(i).observe(getViewLifecycleOwner(), new Observer<ProductResponse>() {
+                    ArrayList<SubSimpleAssociation> productsId = productList.getProducts();
+                    for(SubSimpleAssociation s : productsId){
+                       int finalI = Integer.valueOf(s.getId());
+                        viewModel.getProductResponseLiveData(finalI).observe(getViewLifecycleOwner(), new Observer<ProductResponse>() {
                             @Override
                             public void onChanged(ProductResponse productResponse) {
                                 if(productResponse != null){
@@ -80,5 +85,13 @@ public class ShopFragment extends Fragment {
 
 
 
+    }
+
+    @Override
+    public void onItemClick(ProductResponse product) {
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.host_fragment_main_activity, ProductFragment.newInstance(product.getProductInfo().getId()));
+        transaction.addToBackStack("ShopFragment");
+        transaction.commit();
     }
 }

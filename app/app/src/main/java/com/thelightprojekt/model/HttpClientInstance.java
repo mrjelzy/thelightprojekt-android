@@ -1,7 +1,9 @@
 package com.thelightprojekt.model;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -15,9 +17,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HttpClientInstance {
-    private static OkHttpClient client = null;
 
+    private static OkHttpClient client = null;
     private static Retrofit retrofit;
+    private static Picasso picasso;
 
     static {
         System.loadLibrary("native-lib");
@@ -63,6 +66,16 @@ public class HttpClientInstance {
             }
         }
         return retrofit;
+    }
+
+    public static Picasso getPicasso(Context context){
+        OkHttpClient httpClient = HttpClientInstance.getClient();
+        if(httpClient != null) {
+            picasso = new Picasso.Builder(context)
+                    .downloader(new OkHttp3Downloader(httpClient))
+                    .build();
+        }
+        return picasso;
     }
 
 }

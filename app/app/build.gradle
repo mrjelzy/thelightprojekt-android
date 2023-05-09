@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
 }
-
 android {
     namespace 'com.thelightprojekt'
     compileSdk 33
@@ -65,5 +64,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
-
+    implementation 'me.relex:circleindicator:2.1.6'
+    implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0'
 }
