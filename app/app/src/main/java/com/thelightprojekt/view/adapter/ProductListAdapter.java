@@ -10,20 +10,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 import com.thelightprojekt.R;
 import com.thelightprojekt.model.HttpClientInstance;
-import com.thelightprojekt.model.data.ProductResponse;
-import com.thelightprojekt.view.ShopFragment;
+import com.thelightprojekt.model.data.product.ProductResponse;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductListViewHolder> {
 

@@ -1,4 +1,4 @@
-package com.thelightprojekt.view;
+package com.thelightprojekt.view.product;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.thelightprojekt.R;
 import com.thelightprojekt.model.HttpClientInstance;
-import com.thelightprojekt.model.data.ProductResponse;
+import com.thelightprojekt.model.data.product.ProductResponse;
 import com.thelightprojekt.model.data.SubSimpleAssociation;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
-
-import me.relex.circleindicator.CircleIndicator2;
 
 
 public class ProductFragment extends Fragment {

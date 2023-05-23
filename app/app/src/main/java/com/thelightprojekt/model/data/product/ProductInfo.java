@@ -1,6 +1,7 @@
-package com.thelightprojekt.model.data;
+package com.thelightprojekt.model.data.product;
 
 import com.google.gson.annotations.SerializedName;
+
 
 public class ProductInfo {
     @SerializedName("id")

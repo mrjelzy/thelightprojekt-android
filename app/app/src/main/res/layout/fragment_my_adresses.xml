@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.account.MyOrdersfragment"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_addresses_title"
+        android:textFontWeight="700"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="true"/>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:id="@+id/address_recycler_view"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logout_button"
+        android:layout_width ="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        app:cornerRadius="20dp"
+        android:textFontWeight="700"
+        android:textSize="20dp"
+        android:paddingVertical="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/text_new_address"
+        />
+
+
+</LinearLayout>

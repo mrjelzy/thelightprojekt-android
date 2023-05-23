@@ -1,6 +1,5 @@
 package com.thelightprojekt.view;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,10 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.thelightprojekt.R;
-import com.thelightprojekt.model.data.ProductList;
-import com.thelightprojekt.model.data.ProductResponse;
+import com.thelightprojekt.model.data.product.ProductList;
+import com.thelightprojekt.model.data.product.ProductResponse;
 import com.thelightprojekt.model.data.SubSimpleAssociation;
 import com.thelightprojekt.view.adapter.ProductListAdapter;
+import com.thelightprojekt.view.product.ProductFragment;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
 import java.util.ArrayList;

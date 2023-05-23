@@ -1,21 +1,14 @@
 package com.thelightprojekt.viewmodel;
 
 import android.app.Application;
-import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
-import com.thelightprojekt.model.data.ProductInfo;
-import com.thelightprojekt.model.data.ProductList;
-import com.thelightprojekt.model.data.ProductResponse;
+import com.thelightprojekt.model.data.product.ProductList;
+import com.thelightprojekt.model.data.product.ProductResponse;
 import com.thelightprojekt.model.repositories.ProductRepository;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ProductViewModel extends AndroidViewModel {
 

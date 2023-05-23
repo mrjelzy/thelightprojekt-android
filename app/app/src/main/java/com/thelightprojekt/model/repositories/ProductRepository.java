@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.thelightprojekt.model.HttpClientInstance;
-import com.thelightprojekt.model.data.ProductList;
-import com.thelightprojekt.model.data.ProductResponse;
+import com.thelightprojekt.model.data.product.ProductList;
+import com.thelightprojekt.model.data.product.ProductResponse;
 import com.thelightprojekt.model.interfaces.IProductService;
 
 

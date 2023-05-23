@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import com.google.android.material.navigation.NavigationBarView;
 import com.thelightprojekt.R;
+import com.thelightprojekt.model.UserState;
+import com.thelightprojekt.view.account.ProfileFragment;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,17 +32,27 @@ public class MainActivity extends AppCompatActivity {
         NavigationBarView navBarr=findViewById(R.id.bottomNavBar);
         LoginFragment loginFragment=new LoginFragment();
         HomeFragment homeFragment=new HomeFragment();
+        ProfileFragment profileFragment = new ProfileFragment();
+
         navBarr.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
 
                     case R.id.account:
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.host_fragment_main_activity,loginFragment)
-                                .setReorderingAllowed(true)
-                                .addToBackStack("LoginFragment")
-                                .commit();
+                        if(UserState.getInstance().getUser() != null){
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.host_fragment_main_activity,profileFragment)
+                                    .setReorderingAllowed(true)
+                                    .addToBackStack("ProfileFragment")
+                                    .commit();
+                        }else{
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.host_fragment_main_activity,loginFragment)
+                                    .setReorderingAllowed(true)
+                                    .addToBackStack("LoginFragment")
+                                    .commit();
+                        }
                         return true;
 
                     case R.id.home:
@@ -55,20 +66,5 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-      /*  TextView productText = findViewById(R.id.product_title);
-
-        productViewModel = new ViewModelProvider(this).get(ProductViewModel.class);
-
-        final Observer<ProductResponse> nameObserver = new Observer<ProductResponse>() {
-            @Override
-            public void onChanged(@Nullable final ProductResponse product) {
-                if(product != null)
-                    productText.setText(product.getProductInfo().getName());
-            }
-        };
-
-        productViewModel.getProductResponseLiveData(1).observe(this, nameObserver);*/
-
     }
 }

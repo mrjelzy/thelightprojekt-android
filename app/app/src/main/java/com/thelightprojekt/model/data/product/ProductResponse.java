@@ -1,6 +1,4 @@
-package com.thelightprojekt.model.data;
-
-import android.graphics.Bitmap;
+package com.thelightprojekt.model.data.product;
 
 import com.google.gson.annotations.SerializedName;
 
