@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationBarView navBarr=findViewById(R.id.bottomNavBar);
         LoginFragment loginFragment=new LoginFragment();
         HomeFragment homeFragment=new HomeFragment();
+        ChatFragment chatFragment=new ChatFragment();
         navBarr.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -51,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
                                 .addToBackStack("HomeFragment")
                                 .commit();
                         return true;
+
+                    case R.id.chat:
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.host_fragment_main_activity,chatFragment)
+                                .setReorderingAllowed(true)
+                                .addToBackStack("ChatFragment")
+                                .commit();
                 }
                 return false;
             }
