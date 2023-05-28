@@ -7,11 +7,13 @@ import com.thelightprojekt.model.HttpClientInstance;
 import com.thelightprojekt.model.data.address.AddressList;
 import com.thelightprojekt.model.data.address.AddressResponse;
 import com.thelightprojekt.model.data.address.CountryResponse;
+import com.thelightprojekt.model.data.customer.UserResponse;
 import com.thelightprojekt.model.data.order.OrderList;
 import com.thelightprojekt.model.data.order.OrderResponse;
 import com.thelightprojekt.model.data.order.OrderState;
 import com.thelightprojekt.model.interfaces.IAddressService;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,6 +73,24 @@ public class AddressRepository {
             @Override
             public void onFailure(Call<CountryResponse> call, Throwable t) {
                 System.out.println("request failed: " + t.getMessage());
+            }
+        });
+        return data;
+    }
+
+    public LiveData<Boolean> createAddress(AddressResponse address){
+        final MutableLiveData<Boolean> data = new MutableLiveData<Boolean>();
+        addressService.createAddress(address).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    data.setValue(true);
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("request failed: " + t.getMessage());
+                data.setValue(false);
             }
         });
         return data;

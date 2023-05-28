@@ -49,6 +49,8 @@ public class ProfileFragment extends Fragment {
             MaterialCardView myProfileCard = view.findViewById(R.id.myprofile_card);
             MaterialCardView myOrdersCard = view.findViewById(R.id.myorders_card);
             MaterialCardView myAddressesCard = view.findViewById(R.id.myaddresses_card);
+            MaterialCardView myPrescriptionsCard = view.findViewById(R.id.myprescriptions_card);
+
             MaterialButton logoutButton = view.findViewById(R.id.logout_button);
 
             logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +102,17 @@ public class ProfileFragment extends Fragment {
                             .replace(R.id.host_fragment_main_activity, new MyAddressesFragment())
                             .setReorderingAllowed(true)
                             .addToBackStack("MyAddressesFragment")
+                            .commit();
+                }
+            });
+
+            myPrescriptionsCard.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.host_fragment_main_activity, new MyPrescriptionsFragment())
+                            .setReorderingAllowed(true)
+                            .addToBackStack("MyPrescriptionsFragment")
                             .commit();
                 }
             });

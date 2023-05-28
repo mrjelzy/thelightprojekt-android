@@ -2,59 +2,47 @@ package com.thelightprojekt.view.account;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.thelightprojekt.R;
+import com.thelightprojekt.model.UserState;
+import com.thelightprojekt.model.data.customer.UserInfo;
+import com.thelightprojekt.model.data.order.OrderItem;
+import com.thelightprojekt.model.data.order.OrderList;
+import com.thelightprojekt.model.data.order.OrderResponse;
+import com.thelightprojekt.model.data.prescription.PrescriptionItem;
+import com.thelightprojekt.model.data.prescription.PrescriptionList;
+import com.thelightprojekt.model.data.prescription.PrescriptionResponse;
+import com.thelightprojekt.view.LoginFragment;
+import com.thelightprojekt.view.adapter.OrderListAdapter;
+import com.thelightprojekt.view.adapter.PrescriptionListAdapter;
+import com.thelightprojekt.viewmodel.OrderViewModel;
+import com.thelightprojekt.viewmodel.PrescriptionViewModel;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MyPrescriptionsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class MyPrescriptionsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public MyPrescriptionsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyPrescriptionsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MyPrescriptionsFragment newInstance(String param1, String param2) {
-        MyPrescriptionsFragment fragment = new MyPrescriptionsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private PrescriptionViewModel viewModel;
+    private ArrayList<PrescriptionResponse> prescriptions;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        viewModel = new ViewModelProvider(this).get(PrescriptionViewModel.class);
+        viewModel.init();
+        prescriptions = new ArrayList<PrescriptionResponse>();
     }
 
     @Override
@@ -62,5 +50,51 @@ public class MyPrescriptionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_my_prescriptions, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        UserInfo user = UserState.getInstance().getUser();
+
+
+        if(user != null) {
+
+            RecyclerView prescriptionsRecyclerView = view.findViewById(R.id.prescription_recycler_view);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+            linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            prescriptionsRecyclerView.setLayoutManager(linearLayoutManager);
+
+            PrescriptionListAdapter adapter = new PrescriptionListAdapter(requireContext(), prescriptions);
+            prescriptionsRecyclerView.setAdapter(adapter);
+            prescriptionsRecyclerView.setHasFixedSize(true);
+
+            viewModel.getPrescriptionListByIdCustomer(user.getId()).observe(getViewLifecycleOwner(), new Observer<PrescriptionList>() {
+                @Override
+                public void onChanged(PrescriptionList prescriptionList) {
+                    if(prescriptionList != null){
+                        for(PrescriptionItem p : prescriptionList.getPrescritpions())
+                            viewModel.getPrescriptionById(String.valueOf(p.getId())).observe(getViewLifecycleOwner(), new Observer<PrescriptionResponse>() {
+                                @Override
+                                public void onChanged(PrescriptionResponse prescriptionResponse) {
+                                    prescriptions.add(prescriptionResponse);
+                                    adapter.setItems(prescriptions);
+                                    adapter.notifyDataSetChanged();
+                                }
+
+                            });
+                    }
+                }
+            });
+
+
+        }else{
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.host_fragment_main_activity, new LoginFragment())
+                    .setReorderingAllowed(true)
+                    .addToBackStack("LoginFragment")
+                    .commit();
+        }
     }
 }

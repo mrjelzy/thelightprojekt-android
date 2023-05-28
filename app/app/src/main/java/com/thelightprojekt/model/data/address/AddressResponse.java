@@ -9,6 +9,10 @@ public class AddressResponse {
     @Element(name = "address")
     private AddressInfo address;
 
+    public  AddressResponse(){
+        this.address = new AddressInfo();
+    }
+
     public AddressInfo getAddress() {
         return address;
     }

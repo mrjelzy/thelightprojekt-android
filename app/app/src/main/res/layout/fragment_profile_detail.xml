@@ -26,6 +26,20 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"/>
 
+    <TextView
+        android:id="@+id/message_update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:padding="10dp"
+        android:textFontWeight="700"
+        android:layout_gravity="center"
+        android:fontFamily="monospace"
+        android:textColor="@color/white"
+        android:background="@color/green"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -115,7 +129,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/save_button"
+        android:id="@+id/save_button_profile"
         android:layout_width ="346dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -126,6 +140,22 @@
         android:paddingVertical="10dp"
         android:text="@string/text_save_profile"
         />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/return_button_profile"
+        android:layout_marginTop="10dp"
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cornerRadius="20dp"
+        android:text="@string/text_return_profile"
+        android:textSize="20dp"
+        android:textFontWeight="700"
+        android:backgroundTint="@color/white"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        android:paddingVertical="10dp"
+        android:textColor="@color/black"/>
 
 
 </LinearLayout>

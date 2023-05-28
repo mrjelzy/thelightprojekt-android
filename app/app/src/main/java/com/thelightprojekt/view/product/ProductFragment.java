@@ -16,11 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 import com.thelightprojekt.R;
 import com.thelightprojekt.model.HttpClientInstance;
+import com.thelightprojekt.model.data.product.ProductInfo;
 import com.thelightprojekt.model.data.product.ProductResponse;
 import com.thelightprojekt.model.data.SubSimpleAssociation;
+import com.thelightprojekt.view.account.MyAddressesFragment;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
 import org.imaginativeworld.whynotimagecarousel.ImageCarousel;
@@ -43,6 +46,7 @@ public class ProductFragment extends Fragment {
     TextView price;
     TextView description;
     ImageCarousel carousel;
+    MaterialButton addButton;
 
 
     public static ProductFragment newInstance(String id) {
@@ -83,6 +87,8 @@ public class ProductFragment extends Fragment {
         price = view.findViewById(R.id.product_price);
         description = view.findViewById(R.id.product_description);
         carousel = view.findViewById(R.id.carousel);
+        addButton = view.findViewById(R.id.button_add_to_cart);
+
         List<CarouselItem> list = new ArrayList<>();
         carousel.registerLifecycle(getViewLifecycleOwner());
         viewModel.getProductResponseLiveData(product_id).observe(getViewLifecycleOwner(), new Observer<ProductResponse>() {
@@ -90,31 +96,43 @@ public class ProductFragment extends Fragment {
             @Override
             public void onChanged(ProductResponse productResponse) {
                 if (productResponse != null) {
-                    if(productResponse.getProductInfo().getName() != null)
-                        title.setText(productResponse.getProductInfo().getName());
+                    ProductInfo product = productResponse.getProductInfo();
+                    if(product.getName() != null)
+                        title.setText(product.getName());
 
-                    if(productResponse.getProductInfo().getPrice() != null){
-                        String prix = productResponse.getProductInfo().getPrice().replaceAll("\\.?0*$", "");
+                    if(product.getPrice() != null){
+                        String prix = product.getPrice().replaceAll("\\.?0*$", "");
                         price.setText(prix + "€");
                     }
 
-                    if(productResponse.getProductInfo().getDescription() != null){
-                        String descriptionHtml = productResponse.getProductInfo().getDescription().replaceAll("<.*?>", "");
+                    if(product.getDescription() != null){
+                        String descriptionHtml =product.getDescription().replaceAll("<.*?>", "");
                         description.setText(descriptionHtml);
                     }
 
 
-                    images = productResponse.getProductInfo().getAssociations().getImages();
+                    images = product.getAssociations().getImages();
                     Log.d("ProductFragment", "Product images size: " + images.size());
                     Map<String, String> headers = new HashMap<>();
                     headers.put("Authorization", "Basic " + HttpClientInstance.getEncryptedKey());
                     for(SubSimpleAssociation i : images){
-                        if(!i.getId().equals(productResponse.getProductInfo().getDefaultImage())){
+                        if(!i.getId().equals(product.getDefaultImage())){
                             String urlImg = "https://www.thelightprojekt.com/api/images/products/"+product_id+"/"+i.getId()+"/";
                             list.add(new CarouselItem(urlImg, headers));
                         }
                     }
                     carousel.setData(list);
+
+                    addButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                                getParentFragmentManager().beginTransaction()
+                                        .replace(R.id.host_fragment_main_activity, LensFragment.newInstance(product.getId()))
+                                        .setReorderingAllowed(true)
+                                        .addToBackStack("LensChoosingFragment")
+                                        .commit();
+                        }
+                    });
                 }
             }
         });

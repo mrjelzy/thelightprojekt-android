@@ -7,7 +7,7 @@ import org.simpleframework.xml.Root;
 
 @Root(name = "address")
 public class AddressInfo {
-    @Element(name = "id")
+    @Element(name = "id", required = false)
     private String id;
 
     @Element(name = "id_customer")
@@ -41,6 +41,8 @@ public class AddressInfo {
     private String alias;
 
     private String countryName;
+
+    public AddressInfo(){}
 
     public String getId() {
         return id;

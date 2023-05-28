@@ -8,6 +8,7 @@ import com.thelightprojekt.model.data.customer.CustomerList;
 import com.thelightprojekt.model.data.customer.UserResponse;
 import com.thelightprojekt.model.interfaces.IUserService;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -66,6 +67,42 @@ public class UserRepository {
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 System.out.println("request failed: " + t.getMessage());
+            }
+        });
+        return data;
+    }
+
+    public LiveData<Boolean> createUser(UserResponse user){
+        final MutableLiveData<Boolean> data = new MutableLiveData<Boolean>();
+        userService.createUser(user).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    data.setValue(true);
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("request failed: " + t.getMessage());
+                data.setValue(false);
+            }
+        });
+        return data;
+    }
+
+    public LiveData<Boolean> updateUser(UserResponse user){
+        final MutableLiveData<Boolean> data = new MutableLiveData<Boolean>();
+        userService.updateUser(user.getUser().getId(), user).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    data.setValue(true);
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("request failed: " + t.getMessage());
+                data.setValue(false);
             }
         });
         return data;

@@ -5,7 +5,8 @@ import org.simpleframework.xml.Root;
 
 @Root(name = "customer")
 public class UserInfo {
-    @Element(name = "id")
+
+    @Element(name = "id", required = false)
     private String id;
 
     @Element(name = "firstname")
@@ -59,4 +60,6 @@ public class UserInfo {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public  UserInfo(){}
 }

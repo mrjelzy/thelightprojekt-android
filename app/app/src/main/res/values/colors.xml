@@ -9,4 +9,6 @@
     <color name="beautyBlack">#221F20</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#EA3223</color>
+    <color name="blue">#2C72DB</color>
+    <color name="green">#80B384</color>
 </resources>

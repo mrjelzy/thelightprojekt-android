@@ -24,14 +24,12 @@ import java.util.ArrayList;
 
 public class LoginFragment extends Fragment {
     private UserViewModel viewModel;
-    private ArrayList<CustomerList> customers;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(UserViewModel.class);
         viewModel.init();
-        customers = new ArrayList<CustomerList>();
     }
 
     @Override

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.button.MaterialButton;
 import com.thelightprojekt.R;
 import com.thelightprojekt.model.UserState;
 import com.thelightprojekt.model.data.address.AddressItem;
@@ -55,7 +56,7 @@ public class MyAddressesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         UserInfo user = UserState.getInstance().getUser();
-
+        MaterialButton newButton = view.findViewById(R.id.new_address_button);
 
         if(user != null) {
 
@@ -67,6 +68,17 @@ public class MyAddressesFragment extends Fragment {
             AddressListAdapter adapter = new AddressListAdapter(requireContext(), addresses);
             addressesRecyclerView.setAdapter(adapter);
             addressesRecyclerView.setHasFixedSize(true);
+
+            newButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getParentFragmentManager().beginTransaction()
+                            .replace(R.id.host_fragment_main_activity, new NewAddressFragment())
+                            .setReorderingAllowed(true)
+                            .addToBackStack("NewAddressFragment")
+                            .commit();
+                }
+            });
 
             viewModel.getAddressListByIdCustomer(user.getId()).observe(getViewLifecycleOwner(), new Observer<AddressList>() {
                 @Override

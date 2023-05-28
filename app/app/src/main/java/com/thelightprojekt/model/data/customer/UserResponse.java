@@ -15,4 +15,8 @@ public class UserResponse {
     public void setUser(UserInfo user) {
         this.user = user;
     }
+
+    public UserResponse() {
+        this.user = new UserInfo();
+    }
 }

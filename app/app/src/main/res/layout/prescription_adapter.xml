@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/address_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="20dp"
+        android:layout_marginVertical="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/adapter_prescription_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="Prescription"
+                    android:layout_alignParentLeft="true"/>
+
+                <TextView
+                    android:id="@+id/id_number_prescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/white"
+                    android:background="@drawable/background_rounded"
+                    android:paddingHorizontal="30dp"
+                    android:layout_alignParentRight="true"
+                    android:text="2" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/sph"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="SPH"
+                    android:layout_alignParentLeft="true"
+                    android:paddingLeft="50dp"
+                    />
+
+                <TextView
+                    android:id="@+id/cyl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/sph"
+                    android:text="CYL"
+                    android:paddingHorizontal="15dp"/>
+
+                <TextView
+                    android:id="@+id/axis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/cyl"
+                    android:paddingHorizontal="15dp"
+                    android:text="AXIS"/>
+
+                <TextView
+                    android:id="@+id/pd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/axis"
+                    android:paddingHorizontal="15dp"
+                    android:text="PD"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/od"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="OD"
+                    android:layout_alignParentLeft="true"
+                    android:paddingLeft="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/sph_od"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:text="SPH"
+                    android:paddingLeft="20dp"
+                    android:layout_toRightOf="@id/od"
+                    />
+
+                <TextView
+                    android:id="@+id/cyl_od"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/sph_od"
+                    android:text="CYL"
+                    android:paddingHorizontal="15dp"/>
+
+                <TextView
+                    android:id="@+id/axis_od"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/cyl_od"
+                    android:paddingHorizontal="15dp"
+                    android:text="AXIS"/>
+
+                <TextView
+                    android:id="@+id/pd_od"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/axis_od"
+                    android:paddingHorizontal="13dp"
+                    android:text="PD"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/og"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:text="OD"
+                    android:layout_alignParentLeft="true"
+                    android:paddingLeft="5dp"
+                    />
+
+                <TextView
+                    android:id="@+id/sph_og"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:text="SPH"
+                    android:paddingLeft="20dp"
+                    android:layout_toRightOf="@id/og"
+                    />
+
+                <TextView
+                    android:id="@+id/cyl_og"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/sph_og"
+                    android:text="CYL"
+                    android:paddingHorizontal="15dp"/>
+
+                <TextView
+                    android:id="@+id/axis_og"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/cyl_og"
+                    android:paddingHorizontal="15dp"
+                    android:text="AXIS"/>
+
+                <TextView
+                    android:id="@+id/pd_og"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:layout_toRightOf="@id/axis_og"
+                    android:paddingHorizontal="13dp"
+                    android:text="PD"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

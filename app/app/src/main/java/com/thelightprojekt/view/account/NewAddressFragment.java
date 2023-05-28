@@ -19,42 +19,33 @@ import com.thelightprojekt.R;
 import com.thelightprojekt.model.UserState;
 import com.thelightprojekt.model.data.customer.UserInfo;
 import com.thelightprojekt.view.LoginFragment;
-import com.thelightprojekt.viewmodel.UserViewModel;
+import com.thelightprojekt.viewmodel.AddressViewModel;
 
-public class ProfileDetailFragment extends Fragment {
-    private UserViewModel viewModel;
+public class NewAddressFragment extends Fragment {
+
+    private AddressViewModel viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AddressViewModel.class);
         viewModel.init();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile_detail, container, false);
+        return inflater.inflate(R.layout.fragment_new_address, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         UserInfo user = UserState.getInstance().getUser();
 
         if(user != null){
-            TextInputEditText firstNameInput = view.findViewById(R.id.firstname_input_profile);
-            TextInputEditText lastNameInput = view.findViewById(R.id.lastname_input_profile);
-            TextInputEditText emailInput = view.findViewById(R.id.email_input_profil);
-            MaterialButton saveButton = view.findViewById(R.id.save_button_profile);
-            MaterialButton returnButton = view.findViewById(R.id.return_button_profile);
 
-            firstNameInput.setText(user.getFirstname());
-            lastNameInput.setText(user.getLastname());
-            emailInput.setText(user.getEmail());
-
-            TextView messageUpdate = view.findViewById(R.id.message_update);
+            TextView messageUpdate = view.findViewById(R.id.error_message_address);
             viewModel.getErrorMessageLiveData().observe(getViewLifecycleOwner(), new Observer<String>() {
                 @Override
                 public void onChanged(String message) {
@@ -65,26 +56,31 @@ public class ProfileDetailFragment extends Fragment {
                 }
             });
 
-            saveButton.setOnClickListener(new View.OnClickListener() {
+            TextInputEditText aliasInput = view.findViewById(R.id.alias_input_address);
+            TextInputEditText lastNameInput = view.findViewById(R.id.lastname_input_address);
+            TextInputEditText firstNameInput = view.findViewById(R.id.firstname_input_address);
+            TextInputEditText addressInput = view.findViewById(R.id.address_input_address);
+            TextInputEditText cityInput = view.findViewById(R.id.city_input_address);
+            TextInputEditText postcodeInput = view.findViewById(R.id.postcode_input_address);
+            TextInputEditText mobileInput = view.findViewById(R.id.mobile_input_address);
+            MaterialButton addButton = view.findViewById(R.id.submit_add_address_button);
+
+
+            addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    viewModel.updateUser(String.valueOf(firstNameInput.getText()),
+                public void onClick(View view) {
+                    viewModel.newAddress(String.valueOf(aliasInput.getText()),
+                            String.valueOf(firstNameInput.getText()),
                             String.valueOf(lastNameInput.getText()),
-                            String.valueOf(emailInput.getText()),
+                            String.valueOf(addressInput.getText()),
+                            String.valueOf(cityInput.getText()),
+                            String.valueOf(postcodeInput.getText()),
+                            String.valueOf(mobileInput.getText()),
                             getViewLifecycleOwner());
                 }
             });
 
-            returnButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    getParentFragmentManager().beginTransaction()
-                            .replace(R.id.host_fragment_main_activity, new ProfileFragment())
-                            .setReorderingAllowed(true)
-                            .addToBackStack("ProfileFragment")
-                            .commit();
-                }
-            });
+
 
         }else{
             getParentFragmentManager().beginTransaction()
@@ -93,6 +89,5 @@ public class ProfileDetailFragment extends Fragment {
                     .addToBackStack("LoginFragment")
                     .commit();
         }
-
     }
 }

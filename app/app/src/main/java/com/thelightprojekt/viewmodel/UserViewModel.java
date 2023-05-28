@@ -21,7 +21,7 @@ public class UserViewModel extends AndroidViewModel {
 
     private UserResponse userLiveData;
     private MutableLiveData<Boolean> isLogged = new MutableLiveData<>();
-    private MutableLiveData<String> errorMessageLiveData = new MutableLiveData<>();
+    private MutableLiveData<String> messageLiveData = new MutableLiveData<>();
 
     public UserViewModel(@NonNull Application application) {
         super(application);
@@ -40,7 +40,7 @@ public class UserViewModel extends AndroidViewModel {
     }
 
     public LiveData<String> getErrorMessageLiveData() {
-        return errorMessageLiveData;
+        return messageLiveData;
     }
 
     public LiveData<Boolean> getIsLogged() {
@@ -64,17 +64,64 @@ public class UserViewModel extends AndroidViewModel {
                                     System.out.println("L'utilisateur est connecté");
                                     isLogged.setValue(true);
                                 } else {
-                                    errorMessageLiveData.setValue("Mauvais identifiant");
+                                    messageLiveData.setValue("Mauvais identifiant");
                                 }
                             }
                         }
                     });
                 } else {
-                    errorMessageLiveData.setValue("Aucun utilisateur trouvé");
+                    messageLiveData.setValue("Aucun utilisateur trouvé");
                 }
             }
         });
 
+    }
+
+    public void register(String firstName, String lastName, String email, String password, String confirmPassword, LifecycleOwner lifecycleOwner){
+        if(firstName.isBlank() || lastName.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()){
+            messageLiveData.setValue("Please fill all fields");
+        }else{
+            if(password.equals(confirmPassword)){
+                UserResponse user = new UserResponse();
+                user.getUser().setFirstname(firstName);
+                user.getUser().setLastname(lastName);
+                user.getUser().setPasswd(password);
+                user.getUser().setEmail(email);
+                userRepository.createUser(user).observe(lifecycleOwner, new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean userResponse) {
+                        if(userResponse == true){
+                            login(email, password, lifecycleOwner);
+                        }else{
+                            messageLiveData.setValue("Error creating account");
+                        }
+                    }
+                });
+            }else{
+                messageLiveData.setValue("confirmation password does not match");
+            }
+        }
+    }
+
+    public void updateUser(String firstName, String lastName, String email, LifecycleOwner lifecycleOwner){
+        String idUser = UserState.getInstance().getUser().getId();
+        UserResponse user = new UserResponse();
+        user.getUser().setFirstname(firstName);
+        user.getUser().setLastname(lastName);
+        user.getUser().setEmail(email);
+        user.getUser().setId(idUser);
+        user.getUser().setPasswd(UserState.getInstance().getUser().getPasswd());
+        userRepository.updateUser(user).observe(lifecycleOwner, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean == true){
+                    UserState.getInstance().setUser(user.getUser());
+                    messageLiveData.setValue("User Updated");
+                }else {
+                    messageLiveData.setValue("Error for updating");
+                }
+            }
+        });
     }
 
     public void logout(){

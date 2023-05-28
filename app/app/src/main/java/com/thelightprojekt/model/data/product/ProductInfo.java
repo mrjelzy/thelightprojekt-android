@@ -19,6 +19,9 @@ public class ProductInfo {
     @SerializedName("id_default_image")
     private String defaultImage;
 
+    @SerializedName("id_category_default")
+    private String categorie;
+
     @SerializedName("associations")
     private Association associations;
 
@@ -68,5 +71,13 @@ public class ProductInfo {
 
     public void setDefaultImage(String defaultImage) {
         this.defaultImage = defaultImage;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 }
