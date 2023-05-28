@@ -69,4 +69,7 @@
     <string name="my_prescriptions_title">MY PRESCRIPTIONS</string>
     <string name="text_new_prescription">NEW PRESCRIPTION</string>
     <string name="label_right">RIGHT</string>
+    <string name="label_left">LEFT</string>
+    <string name="label_right_eye">RIGHT EYE</string>
+    <string name="label_left_eye">LEFT EYE</string>
 </resources>
