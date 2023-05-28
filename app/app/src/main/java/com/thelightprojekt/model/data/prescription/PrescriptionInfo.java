@@ -5,16 +5,16 @@ import org.simpleframework.xml.Root;
 
 @Root(name = "prescription")
 public class PrescriptionInfo {
-    @Element(name = "id")
+    @Element(name = "id", required = false)
     private String id;
 
-    @Element(name = "id_prescription")
+    @Element(name = "id_prescription", required = false)
     private String idPrescription;
 
     @Element(name = "id_customer")
     private String idCustomer;
 
-    @Element(name = "id_attachment")
+    @Element(name = "id_attachment", required = false)
     private String idAttachment;
 
     @Element(name = "sphere_left")
@@ -40,6 +40,8 @@ public class PrescriptionInfo {
 
     @Element(name = "pd_right")
     private String pdRight;
+
+    public PrescriptionInfo(){}
 
     public String getId() {
         return id;

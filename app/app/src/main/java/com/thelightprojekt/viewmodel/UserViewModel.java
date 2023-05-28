@@ -61,16 +61,16 @@ public class UserViewModel extends AndroidViewModel {
                                 if (passwordMatches) {
                                     userLiveData = userResponse;
                                     UserState.getInstance().setUser(userResponse.getUser());
-                                    System.out.println("L'utilisateur est connecté");
+                                    System.out.println("User is connected");
                                     isLogged.setValue(true);
                                 } else {
-                                    messageLiveData.setValue("Mauvais identifiant");
+                                    messageLiveData.setValue("Incorrect Credential");
                                 }
                             }
                         }
                     });
                 } else {
-                    messageLiveData.setValue("Aucun utilisateur trouvé");
+                    messageLiveData.setValue("User not found");
                 }
             }
         });

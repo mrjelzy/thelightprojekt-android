@@ -71,6 +71,7 @@ public class MyOrdersfragment extends Fragment {
                 @Override
                 public void onChanged(OrderList orderList) {
                     if(orderList != null){
+                        orders.clear();
                         for(OrderItem o : orderList.getOrders())
                             viewModel.getOrderById(String.valueOf(o.getId()), getViewLifecycleOwner()).observe(getViewLifecycleOwner(), new Observer<OrderResponse>() {
                                 @Override

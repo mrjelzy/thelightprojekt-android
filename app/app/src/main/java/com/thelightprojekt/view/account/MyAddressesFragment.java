@@ -84,6 +84,7 @@ public class MyAddressesFragment extends Fragment {
                 @Override
                 public void onChanged(AddressList addressList) {
                     if(addressList != null){
+                        addresses.clear();
                         for(AddressItem a : addressList.getAddresses()){
                                 viewModel.getAddressById(String.valueOf(a.getId()), getViewLifecycleOwner()).observe(getViewLifecycleOwner(), new Observer<AddressResponse>() {
                                     @Override

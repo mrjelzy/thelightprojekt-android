@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.thelightprojekt.model.HttpClientInstance;
+import com.thelightprojekt.model.data.address.AddressResponse;
 import com.thelightprojekt.model.data.order.OrderList;
 import com.thelightprojekt.model.data.order.OrderResponse;
 import com.thelightprojekt.model.data.prescription.PrescriptionList;
 import com.thelightprojekt.model.data.prescription.PrescriptionResponse;
 import com.thelightprojekt.model.interfaces.IPrescriptionService;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -50,6 +52,24 @@ public class PrescriptionRepository {
             @Override
             public void onFailure(Call<PrescriptionResponse> call, Throwable t) {
                 System.out.println("request failed: " + t.getMessage());
+            }
+        });
+        return data;
+    }
+
+    public LiveData<Boolean> createPrescription(PrescriptionResponse prescription){
+        final MutableLiveData<Boolean> data = new MutableLiveData<Boolean>();
+        prescriptionService.createPrescription(prescription).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.body() != null) {
+                    data.setValue(true);
+                }
+            }
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                System.out.println("request failed: " + t.getMessage());
+                data.setValue(false);
             }
         });
         return data;

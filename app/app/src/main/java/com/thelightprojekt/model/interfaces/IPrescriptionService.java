@@ -1,9 +1,12 @@
 package com.thelightprojekt.model.interfaces;
 
+import com.thelightprojekt.model.data.address.AddressResponse;
 import com.thelightprojekt.model.data.prescription.PrescriptionList;
 import com.thelightprojekt.model.data.prescription.PrescriptionResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -22,7 +25,7 @@ public interface IPrescriptionService {
     );
 
     @POST("/api/prescriptions")
-    Call<PrescriptionResponse> createPrescription(
-            @Path("id") String id
+    Call<ResponseBody> createPrescription(
+            @Body PrescriptionResponse prescription
     );
 }

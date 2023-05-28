@@ -29,6 +29,20 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"/>
 
+        <TextView
+            android:id="@+id/error_message_prescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:padding="10dp"
+            android:textFontWeight="700"
+            android:layout_gravity="center"
+            android:fontFamily="monospace"
+            android:textColor="@color/white"
+            android:background="@color/red"
+            android:layout_marginBottom="20dp"
+            android:visibility="gone"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,13 +115,13 @@
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopStart="15dp"
                     android:layout_marginBottom="14dp"
-                    app:endIconMode="clear_text"
                     android:layout_toRightOf="@id/right"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/right_input_sph_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -121,14 +135,14 @@
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopStart="15dp"
                     android:layout_marginBottom="14dp"
-                    app:endIconMode="clear_text"
                     android:layout_toRightOf="@id/right_input_sph"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     >
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/right_input_cyl_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -142,13 +156,13 @@
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopStart="15dp"
                     android:layout_marginBottom="14dp"
-                    app:endIconMode="clear_text"
                     android:layout_toRightOf="@id/right_input_cyl"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/right_input_axis_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:inputType="number"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -194,13 +208,13 @@
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopStart="15dp"
                     android:layout_marginBottom="14dp"
-                    app:endIconMode="clear_text"
                     android:layout_toRightOf="@id/left"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/left_input_sph_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -214,14 +228,14 @@
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopStart="15dp"
                     android:layout_marginBottom="14dp"
-                    app:endIconMode="clear_text"
                     android:layout_toRightOf="@id/left_input_sph"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     >
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/left_input_cyl_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -235,13 +249,13 @@
                     app:boxCornerRadiusBottomStart="15dp"
                     app:boxCornerRadiusTopStart="15dp"
                     android:layout_marginBottom="14dp"
-                    app:endIconMode="clear_text"
                     android:layout_toRightOf="@id/left_input_cyl"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/left_input_axis_edit"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:inputType="number"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -288,12 +302,12 @@
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopStart="10dp"
                         android:layout_marginBottom="10dp"
-                        app:endIconMode="clear_text"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/right_input_pd_edit"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -333,12 +347,12 @@
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopStart="10dp"
                         android:layout_marginBottom="10dp"
-                        app:endIconMode="clear_text"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/left_input_pd_edit"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"/>
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 

@@ -18,4 +18,8 @@ public class PrescriptionResponse {
     public void setOrder(PrescriptionInfo prescription) {
         this.prescription = prescription;
     }
+
+    public PrescriptionResponse(){
+        prescription = new PrescriptionInfo();
+    }
 }
