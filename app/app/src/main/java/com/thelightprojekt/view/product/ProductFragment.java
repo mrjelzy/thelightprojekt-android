@@ -23,6 +23,7 @@ import com.thelightprojekt.model.HttpClientInstance;
 import com.thelightprojekt.model.data.product.ProductInfo;
 import com.thelightprojekt.model.data.product.ProductResponse;
 import com.thelightprojekt.model.data.SubSimpleAssociation;
+import com.thelightprojekt.view.TryOnFragment;
 import com.thelightprojekt.view.account.MyAddressesFragment;
 import com.thelightprojekt.viewmodel.ProductViewModel;
 
@@ -47,6 +48,7 @@ public class ProductFragment extends Fragment {
     TextView description;
     ImageCarousel carousel;
     MaterialButton addButton;
+    MaterialButton tryOnButton;
 
 
     public static ProductFragment newInstance(String id) {
@@ -88,6 +90,7 @@ public class ProductFragment extends Fragment {
         description = view.findViewById(R.id.product_description);
         carousel = view.findViewById(R.id.carousel);
         addButton = view.findViewById(R.id.button_add_to_cart);
+        tryOnButton = view.findViewById(R.id.button_try_online);
 
         List<CarouselItem> list = new ArrayList<>();
         carousel.registerLifecycle(getViewLifecycleOwner());
@@ -131,6 +134,16 @@ public class ProductFragment extends Fragment {
                                         .setReorderingAllowed(true)
                                         .addToBackStack("LensChoosingFragment")
                                         .commit();
+                        }
+                    });
+                    tryOnButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            getParentFragmentManager().beginTransaction()
+                                    .replace(R.id.host_fragment_main_activity, TryOnFragment.newInstance(product.getId()))
+                                    .setReorderingAllowed(true)
+                                    .addToBackStack("TryOnFragment")
+                                    .commit();
                         }
                     });
                 }

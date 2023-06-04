@@ -20,8 +20,12 @@
         android:paddingHorizontal="40dp"/>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/slim_thining_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkable="true"
+        app:cardForegroundColor="@null"
+        app:checkedIconTint="@color/blue"
         android:layout_marginHorizontal="40dp"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp"
@@ -72,8 +76,12 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/thin_thining_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkable="true"
+        app:cardForegroundColor="@null"
+        app:checkedIconTint="@color/blue"
         android:layout_marginHorizontal="40dp"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp"
@@ -122,8 +130,12 @@
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/extra_thin_thining_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:checkable="true"
+        app:cardForegroundColor="@null"
+        app:checkedIconTint="@color/blue"
         android:layout_marginHorizontal="40dp"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp"
